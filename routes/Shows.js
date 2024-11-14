@@ -34,7 +34,7 @@ show.get('/getusers/:id', async(req, res)=>{
 // POST methods
 show.post('/',
     [
-        check('title').not().isEmpty().trim(),
+        check('title').isLength({max:20}),
         check('genre').not().isEmpty().trim(),
         check('rating').not().isEmpty().trim(),
         check('available').not().isEmpty().trim()
