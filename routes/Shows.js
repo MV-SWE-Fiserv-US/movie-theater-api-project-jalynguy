@@ -34,7 +34,7 @@ show.get('/getusers/:id', async(req, res)=>{
 // POST methods
 show.post('/',
     [
-        check('title').isLength({max:20}),
+        check('title').isLength({max:25, min: 1}).withMessage('Name must be at least 1 character long and max 25 characters long.'),
         check('genre').not().isEmpty().trim(),
         check('rating').not().isEmpty().trim(),
         check('available').not().isEmpty().trim()

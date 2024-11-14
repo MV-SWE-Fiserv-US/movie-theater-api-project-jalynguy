@@ -28,7 +28,7 @@ user.use(express.urlencoded());
 // Post Methods
 user.post('/', 
     [
-        check('username').isEmail(),
+        check('username').isEmail().withMessage('Username must be a valid email'),
         check('password').not().isEmpty().trim()
     ]
     , async (req, res)=>{
