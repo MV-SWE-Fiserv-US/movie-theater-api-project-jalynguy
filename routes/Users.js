@@ -1,6 +1,6 @@
 const express = require('express');
 const user = express.Router();
-const User = require('../models/User.js');
+const {User, Show} = require('../models/index.js');
 const { db } = require('../db/connection.js');
 const { check, validationResult } = require('express-validator');
 
@@ -15,8 +15,12 @@ user.get('/:id', async (req, res)=>{
     res.send(result);
 });
 
-//TODO : GET method for all shows watched by a user
-
+// GET method for all shows watched by a user
+user.get('/findShows/:id', async (req, res)=>{
+    const id = req.params.id;
+    let result = await User.findByPk(id, { include: [Show] });
+    res.send(result.shows).json();
+})
 // Middleware
 user.use(express.json());
 user.use(express.urlencoded());
